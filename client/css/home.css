@@ -31,11 +31,17 @@ main {
   align-items: center;
   position: relative;
   padding: 80px 0;
+  background-color: #aeaefe; /* Light gray background */
+  /* Alternative options:
+  background-color: #e9ecef; /* Slightly darker gray */
+  /* background-color: #f0f4f8; /* Light blue-gray */
+  /* background-color: #f0f7ff; /* Very light blue */
+  /* background-color: var(--section-background); /* Use your theme variable */
 }
 
 .welcome .container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.8fr 1.2fr;
   align-items: center;
   gap: 60px;
   width: 100%;
@@ -44,6 +50,9 @@ main {
 
 .welcome .container .text {
   position: relative;
+  text-align: right;
+  padding-right: 40px;
+  width: 100%;
 }
 
 .welcome .container .text .main {
@@ -55,25 +64,43 @@ main {
   opacity: 0;
   transform: translateY(-40px);
   transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  display: inline-block;
+  text-align: right;
 }
 
 .welcome .container .text .main.active {
   opacity: 1;
   transform: translateY(0);
+  width: 100%;
+  letter-spacing: 0.5px;
+  width: 750px;
+  margin-left: 40px;
+}
+
+.welcome .container .text .subheading {
+  font-size: 1.5rem;
+  color: #555;
+  margin-top: -10px;
+  margin-bottom: 15px;
 }
 
 .welcome .container .img {
   position: relative;
+  margin-left: auto;
+  padding-right: 10px;
+  padding-left: 20px;
+  width: 100%;
 }
 
 .welcome .container .img img {
   width: 100%;
-  max-width: 600px;
+  max-width: 700px;
   height: auto;
   object-fit: contain;
   opacity: 1;
   transform: none;
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  margin-left: 150px;
 }
 
 .welcome .container .img img.active {
@@ -116,12 +143,16 @@ main {
 
 .intro {
   padding: 80px 0;
-  background-color: var(--section-background);
+  background-color: rgb(252, 165, 179);
   border-radius: 40px;
   margin: 40px 0;
 }
+.veeIntro .container{
+  background-color: rgb(252, 165, 179);
+}
 
 .veeIntro .container .wrap {
+  background-color: rgb(252, 165, 179);
   text-align: center;
   margin-bottom: 40px;
 }
@@ -183,6 +214,7 @@ main {
 
 .section-global {
   padding: 80px 0;
+  background-color: rgb(255, 207, 117);
 }
 
 .section-global .container {
@@ -192,6 +224,7 @@ main {
   gap: 60px;
   width: 100%;
   max-width: 100%;
+  
 }
 
 .section-global:nth-child(odd) .container {
@@ -251,6 +284,12 @@ main {
     text-align: center;
     gap: 40px;
     padding: 0 32px;
+  }
+  
+  .welcome .container .text,
+  .welcome .container .img {
+    width: 100%;
+    padding-right: 0;
   }
 
   .welcome .container .text .main {

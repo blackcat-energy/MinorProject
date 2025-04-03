@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marketplace</title>
+    <!-- fav icon -->
+    <link rel="icon" type="image/x-icon" href="../images/fav.png" />
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/location.css" />
+    <link rel="stylesheet" type="text/css" href="../css/selectCourse.css" />
+
+    <!-- normalize-file -->
+    <link rel="stylesheet" href="../css/normalize.css" />
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- logo font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap"
+      rel="stylesheet"
+    />
+    <!-- google icons -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <header class="header" id="header"></header>
+    <div class="location">
+      <div class="heading">
+        <div class="container">
+          <div class="txt">
+            <h2>Marketplace: <span>Buy, Sell, and Connect</span></h2>
+            <div class="description">
+              <img src="../images/grade to pass (2).svg" alt="" />
+              <div>
+                <p>
+                  <span>Welcome to MIT Marketplace!</span> A dedicated platform
+                  for MIT students to buy and sell items within the community.
+                  Whether you're looking for furniture, textbooks, or a
+                  roommate, this is the place to connect with fellow students.
+                  Post your listings or browse through available items to find
+                  what you need.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="card-location">
+          <div class="search">
+            <input
+              type="search"
+              id="search"
+              placeholder="Search listings..."
+              name="search"
+            />
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+
+          <!-- Post New Listing Card - Separated -->
+          <div class="post-listing-card">
+            <div class="card">
+              <div class="card-head">
+                <h4 class="card-title">Post New Listing</h4>
+                <span class="card-subtitle">Sell Your Items</span>
+              </div>
+              <img src="../images/facility manager.svg" alt="Post Listing" />
+              <div class="innerCard">
+                <p class="card-text">
+                  Have something to sell? Post your listing here. Include
+                  photos, description, and price to reach potential buyers.
+                </p>
+                <button class="contactBtn" onclick="goToCreateListing()">Post Listing</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Categories Section -->
+          <div class="categories-section">
+            <h3 class="section-title">Browse Categories</h3>
+            <div class="card-wrap">
+              <div class="card">
+                <div class="card-head">
+                  <h6 class="card-status">NEW</h6>
+                  <h4 class="card-title">Furniture</h4>
+                  <span class="card-subtitle"
+                    >Study Desk, Chair, Bed Frame</span
+                  >
+                </div>
+                <img src="../images/Bookstore.svg" alt="Furniture Image" />
+                <div class="innerCard">
+                  <p class="card-text">
+                    Browse through furniture listings from students moving out.
+                    Find study desks, chairs, bed frames, and more at
+                    student-friendly prices.
+                  </p>
+                  <button class="contactBtn" onclick="goToListings('Furniture')">View Listings</button>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">
+                  <h4 class="card-title">Room Listings</h4>
+                  <span class="card-subtitle">Find Roommates & Apartments</span>
+                </div>
+                <img src="../images/Clinic.svg" alt="Room Listings" />
+                <div class="innerCard">
+                  <p class="card-text">
+                    Looking for a roommate or an apartment? Find and post room
+                    listings, connect with potential roommates, and explore
+                    housing options.
+                  </p>
+                  <button class="contactBtn" onclick="goToListings('Room Listings')">View Listings</button>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">
+                  <h4 class="card-title">Textbooks</h4>
+                  <span class="card-subtitle">Buy & Sell Course Materials</span>
+                </div>
+                <img src="../images/admission.svg" alt="Textbooks" />
+                <div class="innerCard">
+                  <p class="card-text">
+                    Save money on textbooks by buying from seniors or sell your
+                    used books to juniors. Find course materials at discounted
+                    prices.
+                  </p>
+                  <button class="contactBtn" onclick="goToListings('Textbooks')">View Listings</button>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">
+                  <h4 class="card-title">Electronics</h4>
+                  <span class="card-subtitle"
+                    >Laptops, Phones, Accessories</span
+                  >
+                </div>
+                <img src="../images/finance.svg" alt="Electronics" />
+                <div class="innerCard">
+                  <p class="card-text">
+                    Browse through electronics listings including laptops,
+                    phones, and accessories. Find good deals on tech items from
+                    trusted sellers.
+                  </p>
+                  <button class="contactBtn" onclick="goToListings('Electronics')">View Listings</button>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">
+                  <h4 class="card-title">Sports Equipment</h4>
+                  <span class="card-subtitle">Gym Gear, Sports Items</span>
+                </div>
+                <img
+                  src="../images/academic cordinator.svg"
+                  alt="Sports Equipment"
+                />
+                <div class="innerCard">
+                  <p class="card-text">
+                    Find sports equipment, gym gear, and other athletic items.
+                    Perfect for staying active on campus at affordable prices.
+                  </p>
+                  <button class="contactBtn" onclick="goToListings('Sports Equipment')">View Listings</button>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">
+                  <h4 class="card-title">Other Items</h4>
+                  <span class="card-subtitle">Miscellaneous Goods</span>
+                </div>
+                <img src="../images/technical support.svg" alt="Other Items" />
+                <div class="innerCard">
+                  <p class="card-text">
+                    Explore miscellaneous items including kitchenware, decor,
+                    and other essentials. Find great deals on various items.
+                  </p>
+                  <button class="contactBtn" onclick="goToListings('Other Items')">View Listings</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- User Section -->
+          <div class="user-section">
+            <h3 class="section-title">My Account</h3>
+            <div class="card-wrap">
+              <div class="card">
+                <div class="card-head">
+                  <h4 class="card-title">My Listings</h4>
+                  <span class="card-subtitle">Manage Your Posts</span>
+                </div>
+                <img src="../images/exam office.svg" alt="My Listings" />
+                <div class="innerCard">
+                  <p class="card-text">
+                    View and manage your active listings. Track inquiries,
+                    update prices, and mark items as sold.
+                  </p>
+                  <button class="contactBtn">View My Listings</button>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">
+                  <h4 class="card-title">Saved Items</h4>
+                  <span class="card-subtitle">Your Wishlist</span>
+                </div>
+                <img src="../images/copycenter.svg" alt="Saved Items" />
+                <div class="innerCard">
+                  <p class="card-text">
+                    Access your saved listings and track items you're interested
+                    in. Get notified when prices change.
+                  </p>
+                  <button class="contactBtn">View Saved Items</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="loader-wrapper" id="test">
+        <span class="loader" id="loader">Load&nbsp;ng</span>
+      </div>
+    </div>
+
+    <script>
+      // Direct function to handle category navigation
+      function goToListings(category) {
+        console.log('Navigating to listings for category:', category);
+        window.location.href = `listings.html?category=${encodeURIComponent(category)}`;
+      }
+      
+      // Direct function to handle Post Listing button click
+      function goToCreateListing() {
+        console.log('Post Listing button clicked via inline handler');
+        // Check if user is logged in
+        if (!localStorage.getItem('userName')) {
+          window.location.href = 'login.html';
+          return;
+        }
+        // Navigate to create listing page
+        console.log('Redirecting to create-listing.html');
+        window.location.href = 'create-listing.html';
+      }
+      
+      // Make the functions globally available
+      window.goToListings = goToListings;
+      window.goToCreateListing = goToCreateListing;
+    </script>
+
+    <script type="module" src="../js/navbar.js"></script>
+    <script type="module" src="../js/location.js"></script>
+    <script src="../js/marketplace.js"></script>
+  </body>
+</html>

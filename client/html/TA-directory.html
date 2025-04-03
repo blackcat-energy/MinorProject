@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Explore People - MIT Student Connect</title>
+    <!-- fav icon -->
+    <link rel="icon" type="image/x-icon" href="../images/fav.png" />
+  </head>
+
+  <body>
+    <!-- header section -->
+    <header class="header" id="header"></header>
+    <!-- end header -->
+
+    <div class="explore-people">
+      <div class="container">
+        <!-- Header Section -->
+        <div class="page-header">
+          <h1>Explore People at MIT</h1>
+          <p>
+            Connect with students based on branch, year, interests, and more
+          </p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+          <!-- Filters Sidebar -->
+          <aside class="filters-sidebar">
+            <div class="filter-section">
+              <h3>Filters</h3>
+              <div class="filter-group">
+                <label for="branch">Branch</label>
+                <select id="branch">
+                  <option value="">All Branches</option>
+                  <option value="CSE">Computer Science</option>
+                  <option value="ECE">Electronics</option>
+                  <option value="MECH">Mechanical</option>
+                  <option value="CIVIL">Civil</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label for="year">Year</label>
+                <select id="year">
+                  <option value="">All Years</option>
+                  <option value="1">1st Year</option>
+                  <option value="2">2nd Year</option>
+                  <option value="3">3rd Year</option>
+                  <option value="4">4th Year</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label for="interests">Interests</label>
+                <select id="interests">
+                  <option value="">All Interests</option>
+                  <option value="tech">Tech Clubs</option>
+                  <option value="cultural">Cultural Clubs</option>
+                  <option value="sports">Sports</option>
+                  <option value="research">Research</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="view-options">
+              <h3>View Options</h3>
+              <div class="view-toggle">
+                <button class="grid-view active" title="Grid View">
+                  <i class="fas fa-th-large"></i>
+                </button>
+                <button class="list-view" title="List View">
+                  <i class="fas fa-list"></i>
+                </button>
+              </div>
+              <div class="sort-options">
+                <label for="sort">Sort By</label>
+                <select id="sort">
+                  <option value="alphabetical">Alphabetical</option>
+                  <option value="active">Most Active</option>
+                  <option value="recent">Recently Joined</option>
+                </select>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Search and Results -->
+          <div class="content-area">
+            <div class="search-bar">
+              <input
+                type="search"
+                id="searchBar"
+                placeholder="Search students..."
+              />
+              <i class="fas fa-search"></i>
+            </div>
+
+            <!-- Results Grid -->
+            <div class="results-grid">
+              <!-- Loading State -->
+              <div class="loader-wrapper" id="loader">
+                <span class="loader">Load&nbsp;ng</span>
+              </div>
+
+              <!-- Results Container -->
+              <div class="card-wrap"></div>
+
+              <!-- Empty State -->
+              <div class="empty-state" style="display: none">
+                <img src="../images/empty-state.svg" alt="No results found" />
+                <h3>No students found</h3>
+                <p>Try adjusting your filters to find more matches!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="profile-modal" id="profileModal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="modal-body">
+          <!-- Modal content will be dynamically populated -->
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="../js/TA-directory.js"></script>
+    <script type="module" src="../js/navbar.js"></script>
+  </body>
+
+  <footer>
+    <!-- css files -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/TA-directory.css" />
+    <!-- normalize-file -->
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- logo font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap"
+      rel="stylesheet"
+    />
+    <!-- google icons -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Tostify alerts -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  </footer>
+</html>

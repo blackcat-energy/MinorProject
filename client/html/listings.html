@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace Listings - MIT Student Guide</title>
+    <!-- fav icon -->
+    <link rel="icon" type="image/x-icon" href="../images/fav.png" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/location.css" />
+    <link rel="stylesheet" href="../css/listings.css" />
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <!-- Include your other standard CSS and font imports -->
+</head>
+<body>
+    <header class="header" id="header"></header>
+    
+    <div class="listings-page">
+        <div class="container">
+            <div class="listings-header">
+                <h2>Marketplace: <span id="category-title">All Listings</span></h2>
+                <p class="listings-description">Browse through available items in our marketplace. Filter by category, price range, or search for specific items.</p>
+            </div>
+            
+            <div class="filters-section">
+                <div class="search">
+                    <input type="search" id="search" placeholder="Search listings..." name="search" />
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                
+                <div class="filter-options">
+                    <div class="filter-group">
+                        <label for="category-filter">Category</label>
+                        <select id="category-filter">
+                            <option value="">All Categories</option>
+                            <option value="Furniture">Furniture</option>
+                            <option value="Room Listings">Room Listings</option>
+                            <option value="Textbooks">Textbooks</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Sports Equipment">Sports Equipment</option>
+                            <option value="Other Items">Other Items</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="price-filter">Price Range</label>
+                        <select id="price-filter">
+                            <option value="">Any Price</option>
+                            <option value="0-50">$0 - $50</option>
+                            <option value="50-100">$50 - $100</option>
+                            <option value="100-200">$100 - $200</option>
+                            <option value="200-500">$200 - $500</option>
+                            <option value="500+">$500+</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="sort-filter">Sort By</label>
+                        <select id="sort-filter">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                        </select>
+                    </div>
+                    
+                    <button id="apply-filters" class="filter-btn">Apply Filters</button>
+                    <button id="reset-filters" class="filter-btn reset">Reset</button>
+                </div>
+            </div>
+            
+            <div class="listings-container">
+                <div id="listings-wrapper" class="card-wrap">
+                    <!-- Listings will be loaded here dynamically -->
+                    <div class="loading-indicator">
+                        <div class="spinner"></div>
+                        <p>Loading listings...</p>
+                    </div>
+                </div>
+                
+                <div class="pagination" id="pagination">
+                    <!-- Pagination will be added here -->
+                </div>
+            </div>
+            
+            <div class="no-results" style="display: none;">
+                <h3>No listings found</h3>
+                <p>Try adjusting your filters or search terms.</p>
+                <button class="post-listing-btn" onclick="window.location.href='create-listing.html'">Post a Listing</button>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="../js/navbar.js"></script>
+    <script src="../js/listings.js"></script>
+</body>
+</html>

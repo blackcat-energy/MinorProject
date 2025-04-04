@@ -56,10 +56,7 @@
             life!
           </p>
           <div class="hero-illustration">
-            <img
-              src="C:\Users\maitr\Downloads\MIT-Student-Guide-main\client\images\Students.jpeg"
-              alt="Students discussing"
-            />
+            <img src="../images/Students.jpeg" alt="Students discussing" />
           </div>
         </div>
       </section>
@@ -68,137 +65,92 @@
         <div class="content-layout">
           <!-- Main Content -->
           <main class="main-content">
+            <!-- Auth Status -->
+            <div class="auth-status">
+              <div id="loggedOutView">
+                <p>Sign in to participate in discussions</p>
+                <button id="showLoginBtn" class="auth-btn">Login</button>
+                <button id="showRegisterBtn" class="auth-btn">Register</button>
+              </div>
+              <div id="loggedInView" style="display: none">
+                <p>Welcome, <span id="usernameDisplay">User</span>!</p>
+                <button id="logoutBtn" class="auth-btn">Logout</button>
+              </div>
+            </div>
+
             <!-- Sort Options -->
             <div class="sort-options">
-              <select class="sort-select">
+              <select id="sortSelect" class="sort-select">
                 <option value="trending">Trending</option>
                 <option value="newest">Newest</option>
-                <option value="top">Most Upvoted</option>
+                <option value="most-upvoted">Most Upvoted</option>
               </select>
             </div>
 
             <!-- Posts Feed -->
-            <div class="posts-feed">
-              <!-- Sample Post -->
-              <div class="post-card">
-                <div class="post-votes">
-                  <button class="vote-btn upvote">
-                    <i class="fas fa-arrow-up"></i>
-                  </button>
-                  <span class="vote-count">42</span>
-                  <button class="vote-btn downvote">
-                    <i class="fas fa-arrow-down"></i>
-                  </button>
-                </div>
-                <div class="post-content">
-                  <div class="post-header">
-                    <div class="user-info">
-                      <img
-                        src="../images/default-avatar.png"
-                        alt="User Avatar"
-                        class="avatar"
-                      />
-                      <span class="username">Anonymous</span>
-                      <span class="post-time">2 hours ago</span>
-                    </div>
-                    <div class="post-actions">
-                      <button class="action-btn">
-                        <i class="far fa-bookmark"></i>
-                      </button>
-                      <button class="action-btn">
-                        <i class="fas fa-share"></i>
-                      </button>
-                      <button class="action-btn">
-                        <i class="fas fa-ellipsis-h"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <h2 class="post-title">
-                    Tips for managing time during exam season?
-                  </h2>
-                  <p class="post-preview">
-                    I'm struggling to balance my study schedule with
-                    extracurricular activities. Any advice on creating an
-                    effective study plan?
-                  </p>
-                  <div class="post-tags">
-                    <span class="tag">#Academics</span>
-                    <span class="tag">#TimeManagement</span>
-                  </div>
-                  <div class="post-footer">
-                    <button class="comment-btn">
-                      <i class="far fa-comment"></i> 12 Comments
-                    </button>
-                  </div>
-                </div>
+            <div class="posts-feed" id="postsFeed">
+              <!-- Posts will be loaded here -->
+              <div class="loading-indicator">
+                <p>Loading posts...</p>
               </div>
-              <!-- More posts will be dynamically added here -->
             </div>
           </main>
 
           <!-- Sidebar -->
           <aside class="sidebar">
+            <!-- New Post Button -->
+            <button id="newPostBtn" class="new-post-btn">
+              <i class="fas fa-plus"></i>
+              New Post
+            </button>
+
             <!-- Trending Topics -->
             <div class="sidebar-section">
-              <h3>Trending Topics</h3>
-              <ul class="trending-topics">
-                <li>
-                  <a href="#">#ExamPreparation</a>
-                  <span class="topic-count">128 posts</span>
-                </li>
-                <li>
-                  <a href="#">#InternshipTips</a>
-                  <span class="topic-count">96 posts</span>
-                </li>
-                <li>
-                  <a href="#">#HostelLife</a>
-                  <span class="topic-count">84 posts</span>
-                </li>
-                <li>
-                  <a href="#">#ProjectIdeas</a>
-                  <span class="topic-count">72 posts</span>
-                </li>
-              </ul>
+              <h3 class="sidebar-title">Trending Topics</h3>
+              <div class="trending-topics">
+                <a href="#" class="topic-tag">#academics</a>
+                <a href="#" class="topic-tag">#campuslife</a>
+                <a href="#" class="topic-tag">#careers</a>
+                <a href="#" class="topic-tag">#events</a>
+              </div>
             </div>
 
             <!-- Top Contributors -->
             <div class="sidebar-section">
-              <h3>Top Contributors</h3>
-              <ul class="top-contributors">
-                <li>
-                  <img src="../images/default-avatar.png" alt="User Avatar" />
+              <h3 class="sidebar-title">Top Contributors</h3>
+              <div class="top-contributors">
+                <div class="contributor">
+                  <img
+                    src="../images/default-avatar.png"
+                    alt="User"
+                    class="avatar"
+                  />
                   <div class="contributor-info">
-                    <span class="username">StudyPro</span>
-                    <span class="karma">2.4k karma</span>
+                    <span class="username">JohnDoe</span>
+                    <span class="karma">1.2k karma</span>
                   </div>
-                </li>
-                <li>
-                  <img src="../images/default-avatar.png" alt="User Avatar" />
+                </div>
+                <div class="contributor">
+                  <img
+                    src="../images/default-avatar.png"
+                    alt="User"
+                    class="avatar"
+                  />
                   <div class="contributor-info">
-                    <span class="username">TechGeek</span>
-                    <span class="karma">1.8k karma</span>
+                    <span class="username">JaneSmith</span>
+                    <span class="karma">950 karma</span>
                   </div>
-                </li>
-              </ul>
+                </div>
+              </div>
             </div>
 
             <!-- Quick Links -->
             <div class="sidebar-section">
-              <h3>Quick Links</h3>
+              <h3 class="sidebar-title">Quick Links</h3>
               <ul class="quick-links">
-                <li>
-                  <a href="#"
-                    ><i class="fas fa-book"></i> Community Guidelines</a
-                  >
-                </li>
-                <li>
-                  <a href="#"><i class="fas fa-question-circle"></i> FAQs</a>
-                </li>
-                <li>
-                  <a href="#"
-                    ><i class="fas fa-pen"></i> How to Write a Good Post</a
-                  >
-                </li>
+                <li><a href="#">Community Guidelines</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Contact Moderators</a></li>
               </ul>
             </div>
           </aside>
@@ -206,19 +158,94 @@
       </div>
     </div>
 
-    <!-- New Post Button -->
-    <button class="new-post-btn">
-      <i class="fas fa-plus"></i>
-      New Post
-    </button>
-
-    <!-- Loading Screen -->
-    <div class="loader-wrapper" id="loader">
-      <span class="loader">Load&nbsp;ng</span>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Login</h2>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" autocomplete="email" required />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input
+              type="password"
+              id="loginPassword"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+          <button type="submit" class="primary-btn">Login</button>
+        </form>
+        <p class="form-footer">
+          Don't have an account? <a href="#" id="switchToRegister">Register</a>
+        </p>
+      </div>
     </div>
 
-    <!-- Scripts -->
-    <script type="module" src="../js/resource gateway.js"></script>
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Register</h2>
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="registerUsername">Username</label>
+            <input
+              type="text"
+              id="registerUsername"
+              autocomplete="username"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="registerEmail">Email</label>
+            <input
+              type="email"
+              id="registerEmail"
+              autocomplete="email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">Password</label>
+            <input
+              type="password"
+              id="registerPassword"
+              autocomplete="new-password"
+              required
+            />
+          </div>
+          <button type="submit" class="primary-btn">Register</button>
+        </form>
+        <p class="form-footer">
+          Already have an account? <a href="#" id="switchToLogin">Login</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- New Post Modal -->
+    <div id="newPostModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Create New Post</h2>
+        <form id="newPostForm">
+          <div class="form-group">
+            <label for="postTitle">Title</label>
+            <input type="text" id="postTitle" required />
+          </div>
+          <div class="form-group">
+            <label for="postContent">Content</label>
+            <textarea id="postContent" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="primary-btn">Post</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="../js/resource gateway.js"></script>
     <script type="module" src="../js/navbar.js"></script>
   </body>
 </html>

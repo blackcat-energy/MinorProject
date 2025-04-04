@@ -35,6 +35,55 @@ document.addEventListener('DOMContentLoaded', function() {
             applyFilters();
         }
     });
+
+    // Fetch listings from the backend
+    async function fetchListings() {
+        try {
+            const response = await fetch('/api/listings');
+            if (!response.ok) {
+                throw new Error('Failed to fetch listings');
+            }
+
+            const listings = await response.json();
+            displayListings(listings);
+        } catch (error) {
+            console.error('Error fetching listings:', error);
+            alert('Error fetching listings. Please try again later.');
+        }
+    }
+
+    // Display listings on the page
+    function displayListings(listings) {
+        const listingsWrapper = document.getElementById('listings-wrapper');
+        listingsWrapper.innerHTML = ''; // Clear any existing content
+
+        if (listings.length === 0) {
+            listingsWrapper.innerHTML = '<p>No listings available.</p>';
+            return;
+        }
+
+        listings.forEach(listing => {
+            const listingElement = document.createElement('div');
+            listingElement.className = 'listing-card';
+            listingElement.innerHTML = `
+                <h3>${listing.title}</h3>
+                <p>${listing.description}</p>
+                <p>Price: $${listing.price}</p>
+                <p>Category: ${listing.category}</p>
+                <p>Condition: ${listing.condition}</p>
+                <button onclick="viewListing('${listing._id}')">View Details</button>
+            `;
+            listingsWrapper.appendChild(listingElement);
+        });
+    }
+
+    // Call fetchListings when the page loads
+    fetchListings();
+
+    // Function to view listing details
+    function viewListing(id) {
+        window.location.href = `listing-details.html?id=${id}`;
+    }
 });
 
 // Function to apply filters
@@ -93,157 +142,123 @@ function resetFilters() {
 }
 
 // Function to load listings
-async function loadListings(page = 1, category = null, search = '', priceRange = null, sortBy = 'newest') {
+async function loadListings(page = 1, category = '', search = '') {
+    const listingsWrapper = document.getElementById('listings-wrapper');
+    
     try {
-        // Show loading indicator
-        const listingsWrapper = document.getElementById('listings-wrapper');
-        listingsWrapper.innerHTML = `
-            <div class="loading-indicator">
-                <div class="spinner"></div>
-                <p>Loading listings...</p>
-            </div>
-        `;
+        listingsWrapper.innerHTML = '<div class="loading">Loading listings...</div>';
         
-        // Build query parameters
-        const queryParams = new URLSearchParams({
-            page,
-            ...(category && { category }),
-            ...(search && { search }),
-            ...(priceRange && { price: priceRange })
-        });
+        // Log the request URL
+        const url = `/api/marketplace/listings?page=${page}&category=${encodeURIComponent(category)}&search=${encodeURIComponent(search)}`;
+        console.log('Fetching listings from:', url);
         
-        // Handle sort parameter
-        switch(sortBy) {
-            case 'newest':
-                queryParams.set('sort', 'createdAt:desc');
-                break;
-            case 'oldest':
-                queryParams.set('sort', 'createdAt:asc');
-                break;
-            case 'price-low':
-                queryParams.set('sort', 'price:asc');
-                break;
-            case 'price-high':
-                queryParams.set('sort', 'price:desc');
-                break;
-            default:
-                queryParams.set('sort', 'createdAt:desc');
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        // Fetch listings from API
-        const response = await fetch(`/api/marketplace/listings?${queryParams}`);
         const data = await response.json();
+        console.log('Received listings data:', data);
+        
+        if (!data.success) {
+            throw new Error(data.message || 'Failed to fetch listings');
+        }
+        
+        if (data.listings.length === 0) {
+            listingsWrapper.innerHTML = `
+                <div class="no-results">
+                    <h3>No listings found</h3>
+                    <p>Try adjusting your filters or search terms.</p>
+                </div>
+            `;
+            return;
+        }
         
         // Render listings
-        renderListings(data.listings, data.pagination);
+        const listingsHTML = data.listings.map(listing => `
+            <div class="listing-card">
+                <div class="listing-image">
+                    ${listing.images && listing.images.length > 0 
+                        ? `<img src="${listing.images[0]}" alt="${listing.title}">`
+                        : '<div class="no-image">No image available</div>'}
+                </div>
+                <div class="listing-details">
+                    <h3>${listing.title}</h3>
+                    <p class="price">$${listing.price.toFixed(2)}</p>
+                    <p class="category">${listing.category}</p>
+                    <p class="condition">Condition: ${listing.condition}</p>
+                    <p class="location">Location: ${listing.location}</p>
+                    <p class="description">${listing.description.substring(0, 100)}...</p>
+                    <div class="listing-actions">
+                        <button onclick="viewListing('${listing._id}')" class="view-btn">View Details</button>
+                        <button onclick="contactSeller('${listing._id}')" class="contact-btn">Contact Seller</button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+        
+        listingsWrapper.innerHTML = listingsHTML;
+        
+        // Render pagination
+        renderPagination(data.pagination);
+        
     } catch (error) {
         console.error('Error loading listings:', error);
-        document.getElementById('listings-wrapper').innerHTML = `
+        listingsWrapper.innerHTML = `
             <div class="error-message">
-                <p>Failed to load listings. Please try again.</p>
-                <button onclick="loadListings(${page}, '${category}', '${search}')">Retry</button>
+                <h3>Error loading listings</h3>
+                <p>${error.message}</p>
+                <p>Please check your connection and try again.</p>
             </div>
         `;
     }
-}
-
-// Function to render listings
-function renderListings(listings, pagination) {
-    const listingsWrapper = document.getElementById('listings-wrapper');
-    const noResults = document.querySelector('.no-results');
-    
-    if (listings.length === 0) {
-        listingsWrapper.innerHTML = '';
-        noResults.style.display = 'block';
-        document.getElementById('pagination').innerHTML = '';
-        return;
-    }
-    
-    noResults.style.display = 'none';
-    
-    // Generate HTML for listings
-    listingsWrapper.innerHTML = listings.map(listing => `
-        <div class="card" data-id="${listing._id}">
-            <div class="card-head">
-                <h6 class="card-status">${listing.status || 'Available'}</h6>
-                <h4 class="card-title">${listing.title}</h4>
-                <span class="card-subtitle">${listing.category}</span>
-            </div>
-            <img src="${listing.images && listing.images.length > 0 ? listing.images[0] : '../images/placeholder.jpg'}" alt="${listing.title}" />
-            <div class="innerCard">
-                <p class="card-text">${listing.description.substring(0, 100)}${listing.description.length > 100 ? '...' : ''}</p>
-                <div class="price">$${listing.price}</div>
-                <button class="contactBtn" onclick="viewListing('${listing._id}')">View Details</button>
-            </div>
-        </div>
-    `).join('');
-    
-    // Render pagination
-    renderPagination(pagination);
-    
-    // Add event listeners to cards
-    document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('click', function(e) {
-            if (!e.target.classList.contains('contactBtn')) {
-                const id = this.getAttribute('data-id');
-                viewListing(id);
-            }
-        });
-    });
 }
 
 // Function to render pagination
 function renderPagination(pagination) {
-    if (!pagination) return;
-    
-    const { currentPage, totalPages } = pagination;
     const paginationContainer = document.getElementById('pagination');
+    const { total, pages, currentPage } = pagination;
     
-    let paginationHTML = '';
-    
-    // Previous button
-    paginationHTML += `
-        <button class="pagination-btn ${currentPage === 1 ? 'disabled' : ''}" 
-                ${currentPage === 1 ? 'disabled' : `onclick="changePage(${currentPage - 1})"`}>
-            Previous
-        </button>
-    `;
-    
-    // Page numbers
-    const startPage = Math.max(1, currentPage - 2);
-    const endPage = Math.min(totalPages, currentPage + 2);
-    
-    if (startPage > 1) {
-        paginationHTML += `
-            <button class="pagination-btn" onclick="changePage(1)">1</button>
-            ${startPage > 2 ? '<span class="pagination-ellipsis">...</span>' : ''}
-        `;
+    if (pages <= 1) {
+        paginationContainer.innerHTML = '';
+        return;
     }
     
-    for (let i = startPage; i <= endPage; i++) {
+    let paginationHTML = '<div class="pagination-buttons">';
+    
+    // Previous button
+    if (currentPage > 1) {
         paginationHTML += `
-            <button class="pagination-btn ${i === currentPage ? 'active' : ''}" 
-                    onclick="changePage(${i})">
-                ${i}
+            <button onclick="changePage(${currentPage - 1})" class="pagination-btn">
+                Previous
             </button>
         `;
     }
     
-    if (endPage < totalPages) {
-        paginationHTML += `
-            ${endPage < totalPages - 1 ? '<span class="pagination-ellipsis">...</span>' : ''}
-            <button class="pagination-btn" onclick="changePage(${totalPages})">${totalPages}</button>
-        `;
+    // Page numbers
+    for (let i = 1; i <= pages; i++) {
+        if (i === currentPage) {
+            paginationHTML += `
+                <button class="pagination-btn active">${i}</button>
+            `;
+        } else {
+            paginationHTML += `
+                <button onclick="changePage(${i})" class="pagination-btn">${i}</button>
+            `;
+        }
     }
     
     // Next button
-    paginationHTML += `
-        <button class="pagination-btn ${currentPage === totalPages ? 'disabled' : ''}" 
-                ${currentPage === totalPages ? 'disabled' : `onclick="changePage(${currentPage + 1})"`}>
-            Next
-        </button>
-    `;
+    if (currentPage < pages) {
+        paginationHTML += `
+            <button onclick="changePage(${currentPage + 1})" class="pagination-btn">
+                Next
+            </button>
+        `;
+    }
     
+    paginationHTML += '</div>';
     paginationContainer.innerHTML = paginationHTML;
 }
 

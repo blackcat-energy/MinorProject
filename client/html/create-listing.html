@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Listing - MIT Marketplace</title>
+    <title>Create Listing - MIT Student Guide</title>
     <link rel="icon" type="image/x-icon" href="../images/fav.png" />
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/create-listing.css" />
@@ -15,19 +15,28 @@
     
     <div class="create-listing">
         <div class="container">
-            <h2>Create New Listing</h2>
+            <h1>Create New Listing</h1>
             
-            <form id="listingForm" class="listing-form">
+            <form id="create-listing-form">
                 <div class="form-group">
-                    <label for="title">Title*</label>
-                    <input type="text" id="title" name="title" required 
-                           placeholder="Enter a descriptive title for your item">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" required>
                 </div>
-
+                
                 <div class="form-group">
-                    <label for="category">Category*</label>
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" id="price" name="price" step="0.01" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="category">Category</label>
                     <select id="category" name="category" required>
-                        <option value="">Select a category</option>
+                        <option value="">Select category</option>
                         <option value="Furniture">Furniture</option>
                         <option value="Room Listings">Room Listings</option>
                         <option value="Textbooks">Textbooks</option>
@@ -36,15 +45,9 @@
                         <option value="Other Items">Other Items</option>
                     </select>
                 </div>
-
+                
                 <div class="form-group">
-                    <label for="price">Price (USD)*</label>
-                    <input type="number" id="price" name="price" required min="0" step="0.01"
-                           placeholder="Enter your asking price">
-                </div>
-
-                <div class="form-group">
-                    <label for="condition">Condition*</label>
+                    <label for="condition">Condition</label>
                     <select id="condition" name="condition" required>
                         <option value="">Select condition</option>
                         <option value="New">New</option>
@@ -54,50 +57,33 @@
                         <option value="Poor">Poor</option>
                     </select>
                 </div>
-
+                
                 <div class="form-group">
-                    <label for="description">Description*</label>
-                    <textarea id="description" name="description" required
-                              placeholder="Provide details about your item (features, dimensions, etc.)"></textarea>
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" required>
                 </div>
-
+                
                 <div class="form-group">
-                    <label for="images">Images*</label>
-                    <div class="image-upload-container">
-                        <input type="file" id="images" name="images" accept="image/*" multiple required>
-                        <div class="upload-placeholder">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>Click to upload or drag images here</p>
-                            <span>(Maximum 5 images)</span>
-                        </div>
-                        <div id="imagePreview" class="image-preview"></div>
-                    </div>
+                    <label for="contactPreference">Contact Preference</label>
+                    <select id="contactPreference" name="contactPreference" required>
+                        <option value="">Select contact preference</option>
+                        <option value="email">Email</option>
+                        <option value="phone">Phone</option>
+                        <option value="both">Both</option>
+                    </select>
                 </div>
-
+                
                 <div class="form-group">
-                    <label>Contact Preference*</label>
-                    <div class="contact-options">
-                        <label class="radio-label">
-                            <input type="radio" name="contactPreference" value="email" checked>
-                            Email
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="contactPreference" value="phone">
-                            Phone
-                        </label>
-                    </div>
+                    <label for="phone">Phone Number (if applicable)</label>
+                    <input type="tel" id="phone" name="phone">
                 </div>
-
-                <div class="form-group" id="phoneInput" style="display: none;">
-                    <label for="phone">Phone Number*</label>
-                    <input type="tel" id="phone" name="phone" 
-                           placeholder="Enter your phone number">
+                
+                <div class="form-group">
+                    <label for="images">Images</label>
+                    <input type="file" id="images" name="images" multiple accept="image/*">
                 </div>
-
-                <div class="form-actions">
-                    <button type="submit" class="submit-btn">Post Listing</button>
-                    <button type="button" class="cancel-btn" onclick="window.location.href='location.html'">Cancel</button>
-                </div>
+                
+                <button type="submit" class="submit-btn">Create Listing</button>
             </form>
         </div>
     </div>
